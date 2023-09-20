@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: k8s.cic-webpro.com
+  namespace: my-app
+spec:
+  secretName: k8s.cic-webpro.com-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: k8s.cic-webpro.com
+  dnsNames:
+  - k8s.cic-webpro.com

@@ -1,0 +1,26 @@
+---
+deployment:
+  enabled: true
+  kind: Deployment
+  replicas: 3
+  terminationGracePeriodSeconds: 0
+tolerations:
+  - key: "node.kubernetes.io/unreachable"
+    operator: "Exists"
+    effect: "NoExecute"
+    tolerationSeconds: 0
+  - key: "node.kubernetes.io/not-ready"
+    operator: "Exists"
+    effect: "NoExecute"
+    tolerationSeconds: 0
+
+# additionalArguments:
+# - "--accesslog"
+# - "--log.level=DEBUG"
+# - "--entrypoints.web.Address=:80"
+# - "--entrypoints.websecure.Address=:443"
+# - "--providers.kubernetescrd"
+# - "--certificatesresolvers.le.acme.email=youremmail@gmail.com"
+# - "--certificatesresolvers.le.acme.storage=/data/acme.json"
+# - "--certificatesresolvers.le.acme.tlschallenge=true"
+# - "--certificatesresolvers.le.acme.caServer=https://acme-staging-v02.api.letsencrypt.org/directory"
