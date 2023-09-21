@@ -22,13 +22,12 @@ kubectl --kubeconfig=test.yaml apply -k ssl
 ```
 kubectl --kubeconfig=test.yaml create namespace my-app
 kubectl --kubeconfig=test.yaml create configmap index.html --from-file app/index.html
-kubectl --kubeconfig=test.yaml apply -f app/certificate.yaml
-kubectl --kubeconfig=test.yaml apply -f app/deployment.yaml
-kubectl --kubeconfig=test.yaml apply -f app/ingress.yaml
+kubectl --kubeconfig=test.yaml apply -k apps/simple-nginx
 ```
 
 ## Useful Commands
 ```
+kubectl --kubeconfig=test.yaml get pod --all-namespaces
 kubectl --kubeconfig=test.yaml get namespaces
 kubectl --kubeconfig=test.yaml get all -n {namespace_name} -o wide
 kubectl --kubeconfig=test.yaml get all --all-namespaces
