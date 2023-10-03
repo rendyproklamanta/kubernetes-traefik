@@ -34,9 +34,23 @@ spec:
        - selector: { }
          http01:
              ingress: { }
-# DNS challange something like this
-#    - dns01:
-#       digitalocean:
-#         tokenSecretRef:
-#            name: digitalocean-dns
-#            key: access-token
+---
+# DNS Challenge
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-dns
+  namespace: cert-manager
+spec:
+  acme:
+    email: my@email.com
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-dns-key
+    solvers:
+       - dns01:
+          cloudflare:
+            email: your-cloudflare-email@example.com
+            apiKeySecretRef:
+              name: cloudflare-api-key
+              key: api-key

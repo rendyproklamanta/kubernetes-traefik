@@ -7,13 +7,20 @@ metadata:
     traefik.ingress.kubernetes.io/router.middlewares: traefik-network-redirect@kubernetescrd,traefik-network-security@kubernetescrd
   name: my-app-ingress
   namespace: my-app
-#spec:
-# entryPoints:
-#   - web
-#   - websecure
+
 spec:
   rules:
-    - host: k8s.cic-webpro.com
+    - host: "mydomain.com"
+      http:
+        paths:
+          - backend:
+              service:
+                name: my-app-service
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix
+    - host: "test.mydomain.com"
       http:
         paths:
           - backend:
@@ -25,5 +32,9 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - k8s.cic-webpro.com
-      secretName: k8s.cic-webpro.com-tls
+        - "*.mydomain.com"
+      secretName: wildcard.mydomain.com-tls
+    - hosts:
+        - "test.mydomain.com"
+        - "mydomain.com"
+      secretName: mydomain.com-tls

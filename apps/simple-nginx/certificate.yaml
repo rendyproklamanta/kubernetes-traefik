@@ -1,13 +1,27 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: k8s.cic-webpro.com
+  name: mydomain.com
   namespace: my-app
 spec:
-  secretName: k8s.cic-webpro.com-tls
+  secretName: mydomain.com-tls
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
-  commonName: k8s.cic-webpro.com
+  commonName: mydomain.com
   dnsNames:
-  - k8s.cic-webpro.com
+    - mydomain.com
+    - test.mydomain.com
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: wildcard.mydomain.com
+  namespace: my-app
+spec:
+  secretName: wildcard.mydomain.com-tls
+  issuerRef:
+    name: letsencrypt-dns
+    kind: ClusterIssuer
+  dnsNames:
+    - "*.mydomain.com"
