@@ -19,3 +19,16 @@ helm template cert-manager jetstack/cert-manager --namespace cert-manager --vers
 ```
 kubectl apply -k ssl
 ```
+
+### Deploy Sample app
+- Create directory k8s/production|staging
+- Create kustomization.yaml, and inside dir :
+```
+certificate.yaml
+deployment.yaml
+ingress.yaml
+```
+- Deploy app
+```
+kubectl apply -k k8s/production
+```
